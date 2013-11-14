@@ -1,0 +1,24 @@
+*Investment Tracker* A end to end application for tracking stock information
+
+Requires a full LAMP stack
+	Linux (Preferably Debian Based)
+	Apache
+	MySQL
+	PHP
+
+Also requires python with libxml2 module installed
+Also requires tagsoup or tidy to convert loose HTML to tighter XHTML
+
+Program currently downloads the most active stocks off of th USAToday most aactive stocks page this can be changed though the parsing would have to change as well
+
+scrape.sh
+BASH script to continually scrape the web site containing stock data to be injected into database and redisplayed. Currently downloads page every minute for an hour. Number of times and duration of scraping can be changed via constants in script
+
+parse.py:
+Python program which will parse the XHTML document to grab important stock data and inject into local installation of MySQL
+
+display.php
+PHP script to query database for injected data and will display in a variety of formats
+
+Extensions to be implemented:
+using mathplotlib for python information will be displayed using varies charting techniques. this is data visualization extension. to be completed after main functionality is completed
