@@ -4,7 +4,7 @@ import os
 import commands as c
 import re
 import sys
-import MySQLdb
+import MySQLdb as sql
 
 from xml.dom.minidom import parse, parseString
 
@@ -70,8 +70,44 @@ def extract_values(dm):
 ##        print "%s" % (i)
     return lst
 
+def insert_to_db(l,tbl):
+    #connect to the local db instance with conn object
+    host = 'localhost'
+    user = 'test'
+    passwd = 'test123'
+    db = 'investment_tracker'
+    TABLE_NAME = tbl
+    SELECT_DB = 'USE investment_tracker;'
+    conn = sql.connect(host, user, passwd, db)
+
+    #select db
+    conn.query(SELECT_DB)
+    
+    #inject stock info into db from lst of stock information
+
+    for i in range(1,len(l)):
+        symbol = l[i][0]
+        name = l[i][1]
+        price = l[i][2]
+        change = l[i][3]
+        percent_change = l[i][4]
+        vol = l[i][5]
+
+        #queries
+        INSERT = """INSERT INTO `%s` (`Ticker`, `Name`, `Price`, `Change`, `Percent_change`, `Volume`) VALUES ("%s", "%s", "%s", "%s", "%s", "%s");""" % (tbl, symbol, name, price, change, percent_change, vol)      
+        #print INSERT
+        
+        #inject values to db
+        conn.query(INSERT)
+
+    #conn.query("""INSERT INTO `stocks` (`Ticker`, `Name`, `Price`, `Change`, `Percent_change`, `Volume`) VALUES ("DAL", "Delta Air Lines Inc", "28.12", "+0.18", "+0.64%", "10,508,616");""")    
+    #close the db connection
+    conn.commit()
+    conn.close()
+    
+
 def main():
-    html_fn = 'test.html'
+    html_fn = sys.argv[1]
     fn = html_fn.replace('.html','')
     xhtml_fn = html_to_xhtml(html_fn)
 
@@ -80,8 +116,12 @@ def main():
 
     lst = extract_values(dom)
 
-    for i in lst:
-        print "%s" % (i)
+    insert_to_db(lst,fn)
     
+    #cursor = insert_to_db(lst,fn)
 
-main()
+##    for i in lst:
+##        print "%s" % (i)
+    
+if __name__=="__main__":
+    main()
