@@ -1,0 +1,347 @@
+
+	<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+		<meta name="DESCRIPTION" content="Up to the minute daily gains and losses for domestic and international financial markets, including the DJIA, Nasdaq, NikkeiI, and FTSE.  Also track commodities and treasury securities performance." />
+		<meta name="KEYWORDS" content="market performance, stock market, stock market performance, market gains, market losses, global markets, stock market news " />
+		<title>
+			Most Active Stocks - USATODAY.com
+		</title>
+		<link rel="stylesheet" type="text/css" href="http://i.usatoday.net/_common/_styles/_foundation/reset-fonts-grids-usat.css" />
+		<link rel="stylesheet" type="text/css" href="http://www.usatoday.com/_inside2011/_c/story.css" />
+		<link rel="stylesheet" type="text/css" href="http://www.usatoday.com/_inside2011/_c/money.css" />
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.7.2.custom.css" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/idms_autocomplete.css" />
+		<link rel="icon" href="http://i.usatoday.net/_common/_images/usat16x16.png" type="image/png" />
+		<link rel="alternate" type="application/rss+xml" title="Top Headlines" href="http://rssfeeds.usatoday.com/usatoday-NewsTopStories" />
+		<link rel="alternate" type="application/rss+xml" title="Money Headlines" href="http://rssfeeds.usatoday.com/UsatodaycomMoney-TopStories" />
+		<script type="text/javascript">
+			var storyURL = "markets.usatoday.com";
+		</script>
+		<script type="text/javascript" src="http://www.usatoday.com/_common/_scripts/inside-2011.js"></script>
+		<script type="text/javascript" src="http://i.usatoday.net/_common/_scripts/_money/marketwatch/inside2011.js"></script>
+		<script type="text/javascript" src="http://i.usatoday.net/_common/_scripts/usat.js"></script>
+		<script type="text/javascript" src="http://i.usatoday.net/_common/_scripts/sniffer.js"></script>
+		<script type="text/javascript" src="http://i.usatoday.net/_common/_scripts/zagAll.js"></script>
+		<script type="text/javascript" src="http://i.usatoday.net/_common/_scripts/cookietouch.js"></script>
+		<script type="text/javascript" src="http://i.usatoday.net/_common/_scripts/_navs/sectionnav.js"></script>
+		<script type="text/javascript" src="http://i.usatoday.net/_common/_scripts/_oas/google.js"></script>
+		<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.7.2.complete.min.js"></script>
+		<script type="text/javascript" src="js/jquery.tooltip.min.js"></script>
+		<script type="text/javascript" src="js/idms.autocomplete.js?rnd=11%2F16%2F2013+9%3A58%3A05+PM"></script>
+		<script type="text/javascript">
+			searchURL = 'http://www.suggest.idmanagedsolutions.com/generic.idms';
+			$(document).ready(function () {
+				lookup = new IDMSAutocomplete(jQuery("#symbol_search"), {
+					exchanges: "NYSE,NASDAQ,AMEX,OBB,PNK",
+					params: "&src=MDG&type=STO,C_STO,PREF_STO,FUN,ETF",
+					onSelect: function (row, obj) {
+						var symbol = jQuery(".symbol", row).text();
+						if (!symbol) {
+							var url = jQuery(row).find(".search_results").val();
+							obj.element.blur();
+							if (url) {
+								window.location = url;
+							}
+							return;
+						};
+						obj.element.val(symbol).blur();
+						window.location = jQuery(row).find(".redirect_url").val();
+					},
+					onSubmit: function (obj) {
+						lookup.settings.onSelect(jQuery("tr:first", obj.results), obj);
+					},
+					resultRow: function (symbol, name, exchange, id) {
+						// strip any HTML tags from symbol
+						jQuery("body").append('<div id="autocomplete_dummy" style="display:none">' + symbol + '</div>');
+						var rawSymbol = jQuery("#autocomplete_dummy").text();
+						jQuery("#autocomplete_dummy").remove();
+						var url = "";
+
+						if (rawSymbol == "DJIA" || rawSymbol == "I:DJI") {
+							url = "http://www.usatoday.idmanagedsolutions.com/stocks/overview.idms?index=DJIA";
+						} else if (rawSymbol == "INX") {
+							url = "http://www.usatoday.idmanagedsolutions.com/stocks/overview.idms?index=SP500";
+						} else if (rawSymbol == "I:COMP") {
+							url = "http://www.usatoday.idmanagedsolutions.com/stocks/overview.idms?index=NASDAQ";
+						} else {
+							url = "http://www.usatoday.idmanagedsolutions.com/www/redirect.idms?SYMBOL_US=" + rawSymbol;
+						} 
+						var html = '<tr><td class="symbol" style="text-align:left;"><input type="hidden" class="redirect_url" value="' + url + '" />'
+								+ symbol + '</td><td style="text-transform:capitalize;text-align:left;">'
+								+ name.toLowerCase() + '</td><td class="exchange">' + exchange + '</td></tr>';
+						return html;
+					},
+
+					postResultsRow: false
+				});
+				jQuery("#getQuote").bind("click", function () {
+					lookup.settings.onSubmit(lookup);
+					return false;
+				});
+			});
+		</script>
+		<style type="text/css">
+					/*Stock lookup ribbon styles*/
+					.stock-lookup {
+							background: #dbdbdb url(http://i.usatoday.net/_inside2011/_i/stocks-gradient.png) repeat-x;
+							-moz-border-radius: 5px;
+							border-radius: 5px;
+							border: 1px solid #c9c9c9;
+							padding: 14px 10px 0;
+							margin-top: 5px;
+							position: relative;
+					}
+
+					.stock-lookup a {
+							color: #000;
+							text-decoration: none;
+					}
+
+					.stock-go-button {
+							margin: 0 10px 0 10px;
+					}
+
+					.stock-lookup .inside-copy {
+							color: #000;
+					}
+					.stock-lookup .market-block {
+							float: left;
+							font-weight: normal;
+							border-right: 1px solid #9b9b9b;
+							border-left: 1px solid #e8e8e8;
+							height: 20px;
+							padding: 2px 10px 0 5px;
+							font-size: 13px;
+					}
+
+					.stock-lookup .stock-go-button-box {
+							border-right: 1px solid #9b9b9b;
+					}
+
+					.stock-lookup .market-block.last {
+							border-right: none;
+					}
+
+					.stock-lookup .market-block a {
+							padding-top: 7px;
+							font-weight: normal;
+					}
+
+					.stock-lookup a:hover {
+							text-decoration: none;
+					}
+
+					.stock-lookup .market-block .market-name {
+							text-decoration: underline;
+							margin: 0 10px 0 5px;
+					}
+
+					.stock-lookup .market-block .market-number {
+							margin-left: 2px;
+					}
+
+					.stock-lookup .market-block .market-number.green {
+							color: #158b25;
+							padding-left: 2px;
+					}
+
+					.stock-lookup .market-block .green-arrow {
+							margin-left: 4px;
+					}
+
+					.stock-lookup .market-block .market-number.red {
+							color: #ff140d;
+							padding-left: 2px;
+					}
+
+					.stock-lookup .market-block .red-arrow {
+							margin-left: 4px;
+
+					}
+
+					.stock-lookup .market-timestamp {
+							float: right;
+							font-size: 11px;
+							color: #8d8d8d;
+							padding: 0 0 0;
+							position: absolute;
+							right: 10px;
+							top:20px;
+					}
+
+					#rightrailNew {
+							width:300px;
+					}
+			</style>
+		<style type="text/css">
+			.pre-nav .mobile {left: 600px;}
+			.pre-nav .subscribe {left: 520px;}
+			.pre-nav .search {left: 674px;}
+			.pre-nav .search-enter {color:#ffffff}
+			</style>
+	</head>
+	<body>
+		<div id="custom-doc" class="yui-t6">
+			<div id="hd" class="home">
+				<div class="usat_masthead" role="banner">
+					<h1>
+						<a href="http://www.usatoday.com/" onclick="s_objectID='masthead|logo|home';">USA TODAY</a></h1>
+					<h2>
+						<a href="#">Interactive Data</a></h2>
+					<script type="text/javascript">
+						getFragD();
+					</script>
+					<script type="text/javascript">
+						getFragA();
+					</script>
+					<div id="usat_headline"></div>
+				</div>
+				<div id="usat_essentials_nav">
+					<script type="text/javascript">
+						getFrag1();
+					</script>
+				</div>
+				<div class="ad">
+					<banner position="Top728x90" size="728x90"></banner>
+				</div>
+			</div>
+			
+			
+			<div class="stock-lookup">
+				<div align="left" id="stockLookup">
+					<form action="http://www.usatoday.idmanagedsolutions.com/www/redirect.idms" method="get" name="mwQuote">
+						<table cellspacing="0" cellpadding="0" border="0">
+							<tbody>
+								<tr>
+									<td width="15" valign="middle"><img alt="" width="10" height="10" src="http://i.usatoday.net/_common/_images/green.gif" /></td> 								
+									<td width="100"><span style="font-weight: bold;" class="vaTitle">GET A QUOTE:</span></td>
+									<td width="110">
+										<input type="text" maxlength="16" size="16" value="" class="inside-copy" name="SYMBOL_US" id="symbol_search" />
+										<div style="text-align: left;" id="djSymbolComplete"></div>
+									</td>
+									<td width="35" class="stock-go-button-box">
+										<input id="getQuote" vspace="0" hspace="3" border="0" align="absmiddle" type="image" value="Go" name="Submit22" alt="Go Button" src="http://i.usatoday.net/_inside2011/_i/go-button.png" class="stock-go-button" />
+									</td>
+									<td>
+												<a id="quoteStripDJIA" target="_top" href="http://www.usatoday.idmanagedsolutions.com/stocks/overview.idms?index=DJIA" class="market-block first">
+													<p>
+														<span class="market-name">DJIA</span>15,961.70<img src="http://i.usatoday.net/_inside2011/_i/green-arrow.png" class="green-arrow" /><span class="market-number green">+85.48</span>
+													</p>
+												</a>
+											
+												<a id="quoteStripNASDAQ" target="_top" href="http://www.usatoday.idmanagedsolutions.com/stocks/overview.idms?index=NASDAQ" class="market-block ">
+													<p>
+														<span class="market-name">NASDAQ</span>3,985.97<img src="http://i.usatoday.net/_inside2011/_i/green-arrow.png" class="green-arrow" /><span class="market-number green">+13.23</span>
+													</p>
+												</a>
+											
+												<a id="quoteStripSP500" target="_top" href="http://www.usatoday.idmanagedsolutions.com/stocks/overview.idms?index=SP500" class="market-block last">
+													<p>
+														<span class="market-name">S&amp;P 500</span>1,798.18<img src="http://i.usatoday.net/_inside2011/_i/green-arrow.png" class="green-arrow" /><span class="market-number green">+7.56</span>
+													</p>
+												</a>
+											
+
+											<div class="clear"></div>
+											<p class="market-timestamp">as of 12:00 AM ET</p>
+										
+
+									</td>
+								</tr>
+								<tr>
+									<td valign="middle" height="16" colspan="5"><img width="5" height="16" src="http://i.usatoday.net/_common/_images/clear.gif"></td>
+								</tr>
+							</tbody>
+						</table>
+					</form>
+				</div>
+			</div>
+
+
+	
+
+			<br />
+			<div id="rightrailNew">
+				<div id="adContainer">
+					<banner position="Poster3" size="300x250"></banner>
+					<p>
+						Advertisement
+					</p>
+				</div>
+				<div class="searchresults" id="usatsearchresults">
+				</div>
+			</div>
+	<div id="contleft" class="clearfix"><div class="tabNav2 clearfix"><ul><li><a href="html-markets.asp">Markets Overview</a></li><li class="active"><a href="#">Most Active Stocks</a></li><li><a href="html-worldindices.asp">World Stocks</a></li><li><a href="html-internet50.asp">Internet 50</a></li><li class="tbnvnosep"><a href="html-commodities.asp">Commodities</a></li></ul></div><div class="contfullwd clearfix"><div class="fndovcontrol clearfix"><div class="screener" style="width:30%;">Exchange&nbsp;<select id="idcshowstocksexch"  class="scrselmed"><option value="13" selected="selected" >NYSE</option><option value="14">AMEX</option><option value="15">NASDAQ</option><option value="118">Bulletin Board</option></select></div><div class="screenercnt" style="width:50%;">View&nbsp;<select id="idcshowstocksscreen" style="width: 160px;"><option value="1" selected="selected" >Most Active</option><option value="2">% Increase in Price</option><option value="3">% Decrease in Price</option><option value="4">Net Price Increase</option><option value="5">Net Price Decrease</option></select></div><div class="screenercnt" style="width:20%;text-align:right;"><div class="btncta" style="margin-top: 0; font-size:12px;"><a id="idcshowstocksbtn" href="#">Show Stocks</a></div></div></div><div class="clearfix"></div><h3 class="mb10 mt10">Top results</h3><div id="idcquoteholder"><table class="internetfifty"><tr><th class="lft">SYMBOL</th><th style="width: 250px !important;" class="lft">NAME</th><th>PRICE ($)</th><th>CHANGE</th><th>% CHANGE</th><th>VOLUME</th></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=BAC">BAC</a></td><td style="width: 250px !important;" class="lft">Bank Of America Corporation</td><td>14.92</td><td><span class="pos">+0.13</span></td><td><span class="pos">+0.84%</span> <img alt="" src="images/positive.png" /></td><td>105,475,307</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=TMUS">TMUS</a></td><td style="width: 250px !important;" class="lft">T-Mobile US Inc</td><td>26.05</td><td><span class="pos">+0.55</span></td><td><span class="pos">+2.16%</span> <img alt="" src="images/positive.png" /></td><td>68,947,743</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=GE">GE</a></td><td style="width: 250px !important;" class="lft">General Electric Co</td><td>27.20</td><td><span class="pos">+0.21</span></td><td><span class="pos">+0.78%</span> <img alt="" src="images/positive.png" /></td><td>51,698,463</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=JCP">JCP</a></td><td style="width: 250px !important;" class="lft">JC Penney Co Inc</td><td>9.03</td><td><span class="pos">+0.34</span></td><td><span class="pos">+3.91%</span> <img alt="" src="images/positive.png" /></td><td>46,669,709</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=F">F</a></td><td style="width: 250px !important;" class="lft">Ford Motor Co</td><td>17.07</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.02</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.12%</span> <img alt="" src="images/negative.png" /></td><td>33,105,205</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=EMC">EMC</a></td><td style="width: 250px !important;" class="lft">EMC Corp</td><td>24.00</td><td><span class="pos">+0.26</span></td><td><span class="pos">+1.10%</span> <img alt="" src="images/positive.png" /></td><td>29,298,396</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=WU">WU</a></td><td style="width: 250px !important;" class="lft">Western Union Co</td><td>16.70</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.75</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-4.30%</span> <img alt="" src="images/negative.png" /></td><td>29,228,816</td></tr><tr><td class="lft">NOK</td><td style="width: 250px !important;" class="lft">Nokia Corp</td><td>8.00</td><td><span class="pos">+0.11</span></td><td><span class="pos">+1.39%</span> <img alt="" src="images/positive.png" /></td><td>26,914,922</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=PFE">PFE</a></td><td style="width: 250px !important;" class="lft">Pfizer Inc</td><td>32.20</td><td><span class="pos">+0.20</span></td><td><span class="pos">+0.63%</span> <img alt="" src="images/positive.png" /></td><td>24,410,743</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=WFC">WFC</a></td><td style="width: 250px !important;" class="lft">Wells Fargo & Co</td><td>43.54</td><td><span class="pos">+0.45</span></td><td><span class="pos">+1.04%</span> <img alt="" src="images/positive.png" /></td><td>23,401,158</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=S">S</a></td><td style="width: 250px !important;" class="lft">Sprint Corp</td><td>7.42</td><td><span class="pos">+0.31</span></td><td><span class="pos">+4.36%</span> <img alt="" src="images/positive.png" /></td><td>22,396,347</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=C">C</a></td><td style="width: 250px !important;" class="lft">Citigroup Inc</td><td>50.40</td><td><span class="pos">+0.19</span></td><td><span class="pos">+0.38%</span> <img alt="" src="images/positive.png" /></td><td>22,218,640</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=GM">GM</a></td><td style="width: 250px !important;" class="lft">General Motors Co.</td><td>38.77</td><td><span class="pos">+0.27</span></td><td><span class="pos">+0.70%</span> <img alt="" src="images/positive.png" /></td><td>21,699,113</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=ORCL">ORCL</a></td><td style="width: 250px !important;" class="lft">Oracle Corporation</td><td>34.92</td><td><span class="pos">+0.54</span></td><td><span class="pos">+1.57%</span> <img alt="" src="images/positive.png" /></td><td>21,477,665</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=JPM">JPM</a></td><td style="width: 250px !important;" class="lft">JPMorgan Chase & Co</td><td>54.87</td><td><span class="pos">+0.47</span></td><td><span class="pos">+0.86%</span> <img alt="" src="images/positive.png" /></td><td>20,530,108</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=HPQ">HPQ</a></td><td style="width: 250px !important;" class="lft">Hewlett-Packard Co</td><td>25.21</td><td><span class="pos">+0.14</span></td><td><span class="pos">+0.56%</span> <img alt="" src="images/positive.png" /></td><td>19,314,779</td></tr><tr><td class="lft">VALE</td><td style="width: 250px !important;" class="lft">Vale S A</td><td>15.77</td><td><span class="pos">+0.16</span></td><td><span class="pos">+1.02%</span> <img alt="" src="images/positive.png" /></td><td>18,600,429</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=XOM">XOM</a></td><td style="width: 250px !important;" class="lft">Exxon Mobil Corp</td><td>95.27</td><td><span class="pos">+2.05</span></td><td><span class="pos">+2.20%</span> <img alt="" src="images/positive.png" /></td><td>18,374,489</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=RF">RF</a></td><td style="width: 250px !important;" class="lft">Regions Financial Corp</td><td>9.85</td><td><span class="pos">+0.04</span></td><td><span class="pos">+0.41%</span> <img alt="" src="images/positive.png" /></td><td>17,799,853</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=T">T</a></td><td style="width: 250px !important;" class="lft">AT&T Inc</td><td>35.43</td><td><span class="pos">+0.27</span></td><td><span class="pos">+0.77%</span> <img alt="" src="images/positive.png" /></td><td>17,685,950</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=ABX">ABX</a></td><td style="width: 250px !important;" class="lft">Barrick Gold Corporation</td><td>18.07</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.04</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.22%</span> <img alt="" src="images/negative.png" /></td><td>16,064,802</td></tr><tr><td class="lft">ALU</td><td style="width: 250px !important;" class="lft">Alcatel-Lucent</td><td>4.16</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.01</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.24%</span> <img alt="" src="images/negative.png" /></td><td>16,000,510</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=JNPR">JNPR</a></td><td style="width: 250px !important;" class="lft">Juniper Networks Inc</td><td>19.84</td><td><span class="pos">+0.44</span></td><td><span class="pos">+2.27%</span> <img alt="" src="images/positive.png" /></td><td>15,241,921</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=P">P</a></td><td style="width: 250px !important;" class="lft">Pandora Media Inc</td><td>31.56</td><td><span class="pos">+2.09</span></td><td><span class="pos">+7.09%</span> <img alt="" src="images/positive.png" /></td><td>14,635,278</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=GLW">GLW</a></td><td style="width: 250px !important;" class="lft">Corning Inc</td><td>17.01</td><td><span class="pos">+0.22</span></td><td><span class="pos">+1.31%</span> <img alt="" src="images/positive.png" /></td><td>14,419,046</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=ODP">ODP</a></td><td style="width: 250px !important;" class="lft">Office Depot Inc</td><td>5.53</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.09</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-1.60%</span> <img alt="" src="images/negative.png" /></td><td>14,318,609</td></tr><tr><td class="lft">YOKU</td><td style="width: 250px !important;" class="lft">Youku Tudou Inc</td><td>29.30</td><td><span class="pos">+2.94</span></td><td><span class="pos">+11.15%</span> <img alt="" src="images/positive.png" /></td><td>13,712,305</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=VLO">VLO</a></td><td style="width: 250px !important;" class="lft">Valero Energy Corp</td><td>43.00</td><td><span class="pos">+0.16</span></td><td><span class="pos">+0.37%</span> <img alt="" src="images/positive.png" /></td><td>13,692,841</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=LCC">LCC</a></td><td style="width: 250px !important;" class="lft">US Airways Group Inc</td><td>23.89</td><td><span class="pos">+0.23</span></td><td><span class="pos">+0.97%</span> <img alt="" src="images/positive.png" /></td><td>13,661,699</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=KEY">KEY</a></td><td style="width: 250px !important;" class="lft">KeyCorp</td><td>12.85</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.10</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.77%</span> <img alt="" src="images/negative.png" /></td><td>13,326,361</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=AA">AA</a></td><td style="width: 250px !important;" class="lft">Alcoa Inc</td><td>9.03</td><td><span class="pos">+0.05</span></td><td><span class="pos">+0.56%</span> <img alt="" src="images/positive.png" /></td><td>12,813,962</td></tr><tr><td class="lft">TSM</td><td style="width: 250px !important;" class="lft">Taiwan Semiconductor Manufacturing Co Ltd</td><td>17.66</td><td><span class="pos">+0.16</span></td><td><span class="pos">+0.91%</span> <img alt="" src="images/positive.png" /></td><td>12,669,690</td></tr><tr><td class="lft">SMFG</td><td style="width: 250px !important;" class="lft">Sumitomo Mitsui Finl Group I</td><td>10.29</td><td><span class="pos">+0.23</span></td><td><span class="pos">+2.29%</span> <img alt="" src="images/positive.png" /></td><td>12,411,213</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=KO">KO</a></td><td style="width: 250px !important;" class="lft">Coca-Cola Co</td><td>40.22</td><td><span class="pos">+0.01</span></td><td><span class="pos">+0.02%</span> <img alt="" src="images/positive.png" /></td><td>12,021,512</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=BSX">BSX</a></td><td style="width: 250px !important;" class="lft">Boston Scientific Corp</td><td>11.89</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.07</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.59%</span> <img alt="" src="images/negative.png" /></td><td>12,015,536</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=MRK">MRK</a></td><td style="width: 250px !important;" class="lft">Merck & Co Inc New</td><td>48.07</td><td><span class="pos">+0.25</span></td><td><span class="pos">+0.52%</span> <img alt="" src="images/positive.png" /></td><td>11,992,045</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=PHM">PHM</a></td><td style="width: 250px !important;" class="lft">Pulte Group Inc</td><td>18.10</td><td><span class="pos">+0.24</span></td><td><span class="pos">+1.34%</span> <img alt="" src="images/positive.png" /></td><td>11,973,814</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=FCX">FCX</a></td><td style="width: 250px !important;" class="lft">Freeport-McMoRan Copper & Gold Inc</td><td>36.83</td><td><span class="pos">+0.49</span></td><td><span class="pos">+1.35%</span> <img alt="" src="images/positive.png" /></td><td>11,872,112</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=AMD">AMD</a></td><td style="width: 250px !important;" class="lft">Advanced Micro Devices Inc</td><td>3.50</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.02</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.57%</span> <img alt="" src="images/negative.png" /></td><td>11,578,144</td></tr><tr><td class="lft">PBR</td><td style="width: 250px !important;" class="lft">Petroleo Brasileiro SA</td><td>17.27</td><td><span class="pos">+0.24</span></td><td><span class="pos">+1.41%</span> <img alt="" src="images/positive.png" /></td><td>11,135,371</td></tr><tr><td class="lft">AMX</td><td style="width: 250px !important;" class="lft">America Movil SAB de CV</td><td>22.04</td><td><span class="pos">+0.57</span></td><td><span class="pos">+2.65%</span> <img alt="" src="images/positive.png" /></td><td>11,076,676</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=A">A</a></td><td style="width: 250px !important;" class="lft">Agilent Technologies Inc</td><td>54.93</td><td><span class="pos">+4.39</span></td><td><span class="pos">+8.69%</span> <img alt="" src="images/positive.png" /></td><td>11,014,343</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=ANR">ANR</a></td><td style="width: 250px !important;" class="lft">Alpha Natural Resources Inc</td><td>8.08</td><td><span class="pos">+0.34</span></td><td><span class="pos">+4.39%</span> <img alt="" src="images/positive.png" /></td><td>10,835,146</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=LOW">LOW</a></td><td style="width: 250px !important;" class="lft">Lowe's Companies Inc</td><td>51.77</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.18</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.35%</span> <img alt="" src="images/negative.png" /></td><td>10,833,261</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=WLT">WLT</a></td><td style="width: 250px !important;" class="lft">Walter Industries Inc</td><td>16.93</td><td><span class="pos">+0.15</span></td><td><span class="pos">+0.89%</span> <img alt="" src="images/positive.png" /></td><td>10,816,550</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=PBI">PBI</a></td><td style="width: 250px !important;" class="lft">Pitney Bowes Inc</td><td>23.82</td><td><span class="pos">+0.97</span></td><td><span class="pos">+4.25%</span> <img alt="" src="images/positive.png" /></td><td>10,742,095</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=MS">MS</a></td><td style="width: 250px !important;" class="lft">Morgan Stanley</td><td>30.30</td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.04</span></td><td><span class="neg"><span clamyQuote="mwNormalDown">-0.13%</span> <img alt="" src="images/negative.png" /></td><td>10,582,939</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=DAL">DAL</a></td><td style="width: 250px !important;" class="lft">Delta Air Lines Inc</td><td>28.12</td><td><span class="pos">+0.18</span></td><td><span class="pos">+0.64%</span> <img alt="" src="images/positive.png" /></td><td>10,508,616</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=HD">HD</a></td><td style="width: 250px !important;" class="lft">Home Depot Inc</td><td>80.03</td><td><span class="pos">+1.09</span></td><td><span class="pos">+1.38%</span> <img alt="" src="images/positive.png" /></td><td>10,414,767</td></tr><tr><td class="lft"><a href="http://www.usatoday.idmanagedsolutions.com/stocks/quote.idms?SYMBOL_US=RAD">RAD</a></td><td style="width: 250px !important;" class="lft">Rite Aid Corporation</td><td>5.26</td><td><span class="pos">+0.04</span></td><td><span class="pos">+0.77%</span> <img alt="" src="images/positive.png" /></td><td>10,356,198</td></tr></table></div></div><script type="text/javascript">
+	var idcShowStocksBusy = false;
+	(function($){
+		$(function(){  
+			$("html").bind("ajaxStart", function(){
+				$(this).addClass('idcBusy');
+			}).bind("ajaxStop", function(){
+				$(this).removeClass('idcBusy');
+			});
+			$('#idcshowstocksbtn').click(function() {
+				if (idcShowStocksBusy) 
+					return false;
+				idcShowStocksBusy = true;
+				$.ajax({
+					type: 'GET',
+					context: $('#idcquoteholder'),
+					url: 'html-mktscreener.asp?js=1&screen=' + $('#idcshowstocksscreen').val() + '&exchange=' + $('#idcshowstocksexch').val(),
+					dataType: "html",
+					success:
+						function(data) {
+							$(this).html(data);
+							idcShowStocksBusy = false;
+						},
+					error: 
+						function(x,e){
+						}
+				});
+				return false;
+			});
+		});
+	})(jQuery);
+</script>
+
+				<div class="idcdiscl">
+					<p>
+						<a href="http://www.interactivedata.com/" target="_blank">
+							<img height="35" src="http://www.usatoday.idmanagedsolutions.com/images/IDCO.gif" width="139" /></a>
+					</p>
+					<p>
+						Quotes delayed at least 15 minutes. Market data provided by <a href="http://www.interactivedata.com/" target="_blank">Interactive Data</a>.
+					</p>
+					<p>
+						News provided by Marketwatch, Comtex, and AP News. Company fundamental data provided by Morningstar.
+					</p>
+					<p>
+						Powered and implemented by <a href="http://www.interactivedata.com/idms/" target="_blank">Interactive Data Managed Solutions</a>. <a href="http://www.interactivedata-rts.com/index.php/Contents/show/content/quoteTerms"
+							target="_blank">Terms &amp; Conditions</a>.</p>
+				</div>
+
+			</div>				
+ 			<div id="footer">
+				<script type="text/javascript">
+					getFragB();
+				</script>
+				<div id="usat_Bottom728x90" class="footer.ad">
+					<banner position="Bottom728x90" size="728x90"></banner>
+				</div>
+				<script type="text/javascript">
+					getFragC();
+				</script>
+				<div id="usat-footer-03">
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="http://i.usatoday.net/_common/_scripts/_omniture/omniturebase.js"></script>
+		<script type="text/javascript" src="http://i.usatoday.net/_common/_scripts/gel/lib/core/core.js"></script>
+		<script type="text/javascript" src="http://i.usatoday.net/_inside2011/_j/gel-directives-inside-v3.js"></script>
+	</body>
+	</html>
+	
