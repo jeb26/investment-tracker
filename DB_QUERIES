@@ -1,0 +1,9 @@
+CREATE TABLE stocks (
+	ID int NOT NULL AUTO_INCREMENT,
+	Ticker VARCHAR(5),
+	Name VARCHAR(255),
+	Price FLOAT,
+	Change FLOAT,
+	Percent_change FLOAT,
+	Volume BIGINT
+)

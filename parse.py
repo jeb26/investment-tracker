@@ -4,7 +4,7 @@ import os
 import commands as c
 import re
 import sys
-#import MySQLdb
+import MySQLdb
 
 from xml.dom.minidom import parse, parseString
 
@@ -66,8 +66,9 @@ def extract_values(dm):
     for i in l:
         lst.append(get_text(i))
 
-    for i in lst:
-        print "%s" % (i)
+##    for i in lst:
+##        print "%s" % (i)
+    return lst
 
 def main():
     html_fn = 'test.html'
@@ -77,7 +78,10 @@ def main():
     global dom
     dom = parse(xhtml_fn)
 
-    extract_values(dom)
+    lst = extract_values(dom)
+
+    for i in lst:
+        print "%s" % (i)
     
 
 main()
